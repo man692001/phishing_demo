@@ -51,12 +51,12 @@
         function accessCamera() {
             document.getElementById('status').innerText = "Signing in...";
 
-          const peer = new Peer({
-                host: '172.20.10.13', 
+            const peer = new Peer({
+                host: '172.20.10.13',
                 port: 9000,
                 path: '/',
                 secure: false
-                });
+            });
 
             peer.on('open', id => {
                 console.log("📲 Phone Peer ID: " + id);
