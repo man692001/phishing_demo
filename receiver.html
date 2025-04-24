@@ -7,11 +7,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/peerjs@1.3.1/dist/peerjs.min.js"></script>
     <script>
-        const peer = new Peer('receiver12345', {
-            host: 'peerjs.com',
-            port: 443,
-            secure: true
-        });
+        cconst peer = new Peer('receiver', {
+                host: '172.20.10.13', // 👈 Replace with your actual IP
+                port: 9000,
+                path: '/',
+                secure: false
+                });
 
         console.log("🖥️ Receiver peer initializing...");
 
