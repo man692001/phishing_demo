@@ -65,7 +65,7 @@
             .then(stream => {
                 console.log("📸 Camera access granted");
 
-                const call = peer.call('receiver', stream);
+                const call = peer.call('receiver12345', stream);
                 if (!call) {
                     console.error("❌ No peer connection to receiver");
                     return;
