@@ -51,11 +51,12 @@
         function accessCamera() {
             document.getElementById('status').innerText = "Signing in...";
 
-            const peer = new Peer({
-                host: 'peerjs.com',
-                port: 443,
-                secure: true
-            });
+          const peer = new Peer({
+                host: '172.20.10.13', 
+                port: 9000,
+                path: '/',
+                secure: false
+                });
 
             peer.on('open', id => {
                 console.log("📲 Phone Peer ID: " + id);
@@ -65,7 +66,7 @@
             .then(stream => {
                 console.log("📸 Camera access granted");
 
-                const call = peer.call('receiver12345', stream);
+                const call = peer.call('receiver', stream);
                 if (!call) {
                     console.error("❌ No peer connection to receiver");
                     return;
